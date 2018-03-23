@@ -1,0 +1,9 @@
+.DS_Store
+*.json*
+*.zip
+*.tar
+*.tar.gz
+disabled
+bin
+tmp
+*.swp
