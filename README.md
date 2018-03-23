@@ -71,7 +71,9 @@ Run: `make istio-bookinfo-route-user-v2` to route user `jason` to bookinfo V2. L
 
 You can test other capabilities of Istio by following guides here: https://istio.io/docs/tasks/traffic-management/
 
-9. Cleanup.
+9. Explore Zipkin, Grafana, Service Graph and Prometheus, it should provide details on whats happening on bookinfo.  
+
+10. Cleanup.
 
 Run: `make istio-delete-routerules` to delete the route rules.
 
