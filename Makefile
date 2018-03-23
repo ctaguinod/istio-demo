@@ -18,7 +18,7 @@ create-rbac-admin:
 	@kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=$(shell gcloud config get-value core/account)
 
 .PHONY: istio-auth-install 
-istio-install:
+istio-auth-install:
 	@curl -L https://git.io/getLatestIstio | ISTIO_VERSION=$(ISTIO_VERSION) sh -
 	@kubectl apply -f istio-$(ISTIO_VERSION)/install/kubernetes/istio-auth.yaml
 	@kubectl apply -f istio-$(ISTIO_VERSION)/install/kubernetes/addons/
@@ -29,7 +29,7 @@ istio-delete:
 	@kubectl delete -f istio-$(ISTIO_VERSION)/install/kubernetes/istio-auth.yaml
 	@rm -rf istio-$(ISTIO_VERSION)/
 
-.PHONY: get-all 
+.PHONY: istio-get-all 
 istio-get-all:
 	@kubectl get -n istio-system deployments 
 	@kubectl get -n istio-system pods
@@ -58,7 +58,7 @@ istio-deploy-bookinfo:
 	@echo "Bookinfo URL: http://`kubectl get ingress gateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}'`/productpage"
 
 .PHONY: get-bookinfo-url
-bookinfo-url:
+get-bookinfo-url:
 	@echo "Bookinfo URL: http://`kubectl get ingress gateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}'`/productpage"
 
 .PHONY: istio-delete-bookinfo

@@ -7,3 +7,4 @@ disabled
 bin
 tmp
 *.swp
+istio-*.*

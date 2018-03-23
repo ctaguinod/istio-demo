@@ -40,7 +40,7 @@ ISTIO_VERSION=0.6.0
 
 You can read more details here [Quick Start with Google Kubernetes Engine](https://istio.io/docs/setup/kubernetes/quick-start-gke-dm.html)
 
-Run: `make get-all` to verify the installation.
+Run: `make istio-get-all` to verify the installation.
 
 6. Setup forwarding for Zipkin, Grafana, Service Graph and Prometheus. Run: `make istio-port-forward`
 
@@ -52,11 +52,15 @@ Dotviz URL/Port: http://localhost:8088/dotviz
 Prometheus URL/Port: http://localhost:9090/graph
 ```
 
-7. Deploy [Bookinfo](https://istio.io/docs/guides/bookinfo.html). Run: `make istio-deploy-bookinfo` You can get the bookinfo url by running `make get-bookinfo-url`. 
+7. Deploy [Bookinfo](https://istio.io/docs/guides/bookinfo.html). Run: `make istio-deploy-bookinfo` 
+
+You can get the bookinfo url by running `make get-bookinfo-url`. 
+
+Please take not that it might take a coupe of minutes to complete the deployment.
+
+To verify the status of the deployment you can run: `make istio-get-all`
 
 Visit the URL to verify the bookinfo has been deployed properly. You should randomly see the different versions of the app since no routing rules have been applied.
-
-To verify the status of the deployment you can run: `make get-all`
 
 
 8. [Configure Request Routing](https://istio.io/docs/tasks/traffic-management/request-routing.html). 
