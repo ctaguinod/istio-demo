@@ -1,4 +1,0 @@
-steps:
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '--tag=gcr.io/$PROJECT_ID/bookinfo-details:$TAG_NAME', '--build-arg', 'service_version=$TAG_NAME', '.']
-images: ['gcr.io/$PROJECT_ID/bookinfo-details:$TAG_NAME']
