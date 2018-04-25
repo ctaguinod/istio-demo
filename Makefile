@@ -1,6 +1,6 @@
 # ISTIO
 # LATEST RELEASE: https://github.com/istio/istio/releases
-ISTIO_VERSION=0.6.0
+ISTIO_VERSION=0.7.0
 ZIPKIN_POD_NAME=$(shell kubectl -n istio-system get pod -l app=zipkin -o jsonpath='{.items[0].metadata.name}')
 SERVICEGRAPH_POD_NAME=$(shell kubectl -n istio-system get pod -l app=servicegraph -o jsonpath='{.items[0].metadata.name}')
 GRAFANA_POD_NAME=$(shell kubectl -n istio-system get pod -l app=grafana -o jsonpath='{.items[0].metadata.name}')
