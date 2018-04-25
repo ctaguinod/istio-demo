@@ -1,0 +1,96 @@
+# Copyright 2017 Istio Authors
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+
+##################################################################################################
+# Details service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: details
+  labels:
+    stack: details
+spec:
+  ports:
+  - port: 9080
+    name: http
+  selector:
+    stack: details
+---
+##################################################################################################
+# Ratings service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: ratings
+  labels:
+    stack: ratings
+spec:
+  ports:
+  - port: 9080
+    name: http
+  selector:
+    stack: ratings
+---
+##################################################################################################
+# Reviews service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: reviews
+  labels:
+    stack: reviews
+spec:
+  ports:
+  - port: 9080
+    name: http
+  selector:
+    stack: reviews
+---
+##################################################################################################
+# Productpage services
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: productpage
+  labels:
+    stack: productpage
+spec:
+  ports:
+  - port: 9080
+    name: http
+  selector:
+    stack: productpage
+---
+##################################################################################################
+# Productpage services
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: productpage-lb
+  labels:
+    stack: productpage
+spec:
+  ports:
+  - port: 80
+    name: http
+    targetPort: 9080
+  selector:
+    stack: productpage
+  type: LoadBalancer
+---
