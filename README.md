@@ -30,7 +30,7 @@ ISTIO_VERSION=0.6.0
 **3. Create RBAC Admin for your current user.**
 
 ```
-make create-rbac-admin` 
+make create-rbac-admin 
 ```
 
 **4. Install Istio Auth and Addons.** 
