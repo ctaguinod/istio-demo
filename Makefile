@@ -57,6 +57,11 @@ istio-deploy-bookinfo:
 	@istioctl kube-inject -f istio-$(ISTIO_VERSION)/samples/bookinfo/kube/bookinfo.yaml | kubectl apply -f - 
 	@echo "Bookinfo URL: http://`kubectl get ingress gateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}'`/productpage"
 
+.PHONY: istio-deploy-bookinfo-gcr
+istio-deploy-bookinfo-gcr:
+	@istioctl kube-inject -f bookinfo-src/k8s/bookinfo.yaml | kubectl apply -f -
+	@echo "Bookinfo URL: http://`kubectl get ingress gateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}'`/productpage"
+
 .PHONY: get-bookinfo-url
 get-bookinfo-url:
 	@echo "Bookinfo URL: http://`kubectl get ingress gateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}'`/productpage"
@@ -64,6 +69,10 @@ get-bookinfo-url:
 .PHONY: istio-delete-bookinfo
 istio-delete-bookinfo:
 	@kubectl delete -f istio-$(ISTIO_VERSION)/samples/bookinfo/kube/bookinfo.yaml
+
+.PHONY: istio-delete-bookinfo-gcr
+istio-delete-bookinfo-gcr:
+	@kubectl delete -f bookinfo-src/k8s/bookinfo.yaml
 
 .PHONY: istio-bookinfo-route-all-v1
 istio-bookinfo-route-all-v1:
