@@ -23,6 +23,24 @@ istio-auth-install:
 	@kubectl apply -f istio-$(ISTIO_VERSION)/install/kubernetes/istio-auth.yaml
 	@kubectl apply -f istio-$(ISTIO_VERSION)/install/kubernetes/addons/
 
+# https://istio.io/docs/setup/kubernetes/sidecar-injection.html#automatic-sidecar-injection
+.PHONY: istio-sidecar-injector-install 
+istio-sidecar-injector-install:
+	@kubectl apply -f istio-$(ISTIO_VERSION)/install/kubernetes/istio.yaml
+	@./istio-$(ISTIO_VERSION)/install/kubernetes/webhook-create-signed-cert.sh \
+		--service istio-sidecar-injector \
+		--namespace istio-system \
+		--secret sidecar-injector-certs
+	@kubectl apply -f istio-$(ISTIO_VERSION)/install/kubernetes/istio-sidecar-injector-configmap-release.yaml
+	@cat istio-$(ISTIO_VERSION)/install/kubernetes/istio-sidecar-injector.yaml | \
+		./istio-$(ISTIO_VERSION)/install/kubernetes/webhook-patch-ca-bundle.sh > \
+		./istio-$(ISTIO_VERSION)/install/kubernetes/istio-sidecar-injector-with-ca-bundle.yaml
+	@kubectl apply -f istio-$(ISTIO_VERSION)/install/kubernetes/istio-sidecar-injector-with-ca-bundle.yaml
+	@kubectl -n istio-system get deployment -listio=sidecar-injector
+	@kubectl get namespace -L istio-injection
+	@kubectl label namespace default istio-injection=enabled
+	@kubectl get namespace -L istio-injection
+
 .PHONY: istio-delete-all 
 istio-delete:
 	@kubectl delete -f istio-$(ISTIO_VERSION)/install/kubernetes/addons/
